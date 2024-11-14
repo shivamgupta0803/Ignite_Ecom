@@ -7,15 +7,14 @@ import {
 } from "@remix-run/react";
 import "./tailwind.css";
 import Navbar from "./component/Navbar";
-import styles from "./tailwind.css"
+import styles from "./tailwind.css";
 import { LinksFunction } from "@remix-run/node";
-// import { cssBundleHref } from "@remix-run/css-bundle";
+import { cssBundleHref } from "@remix-run/css-bundle";
 
-// export const links: LinksFunction = () => [
-//   { rel: "stylesheet", href: styles },
-//   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-// ]
-
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: styles },
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -36,7 +35,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-
   return (
     <>
       <Navbar />
