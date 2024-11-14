@@ -1,18 +1,8 @@
 import { Form } from "@remix-run/react";
 import { useState } from "react";
+import { Input } from "~/components/ui/input";
 
 export default function AddProduct() {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
-  const [content, setContent] = useState("");
-
-  async function clearForm() {
-    setName("");
-    setPrice("");
-    setImage("");
-    setContent("");
-  }
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-4">
@@ -21,21 +11,11 @@ export default function AddProduct() {
         method="post"
         className="space-y-4"
         action="/admin/addproduct"
-        onSubmit={clearForm}
       >
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Product Name
-            <input
-              type="text"
-              name="name"
-              defaultValue={name ? name : ""}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter product name"
-            />
+            {/* <Input type="email" placeholder="Email" /> */}
           </label>
         </div>
         <div>
