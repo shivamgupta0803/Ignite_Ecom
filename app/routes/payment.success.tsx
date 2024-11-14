@@ -11,14 +11,14 @@ import { db } from "~/utils/db.server";
 import { authenticator } from "~/utils/auth.server";
 import Swal from "sweetalert2";
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const user = await authenticator.isAuthenticated(request);
-  if (!user) {
-    return redirect("/login");
-  }
+// export const loader = async ({ request }: LoaderFunctionArgs) => {
+//   const user = await authenticator.isAuthenticated(request);
+//   if (!user) {
+//     return redirect("/login");
+//   }
 
-  return json({ user });
-};
+//   return json({ user });
+// };
 
 const PaymentSuccess = () => {
   const user = useLoaderData();

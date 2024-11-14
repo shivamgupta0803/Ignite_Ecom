@@ -5,10 +5,10 @@ import { db } from "~/utils/db.server";
 import { authenticator } from "~/utils/auth.server";
 
 export const loader = async ({ params, request }: { params: LoaderFunctionArgs }) => {
-  const user = await authenticator.isAuthenticated(request);
-  if (!user) {
-    return redirect("/login");
-  }
+  // const user = await authenticator.isAuthenticated(request);
+  // if (!user) {
+  //   return redirect("/login");
+  // }
   const product = await db.product.findUnique({
     where: { id: params.productId },
   });

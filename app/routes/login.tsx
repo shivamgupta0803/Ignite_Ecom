@@ -4,41 +4,13 @@ import { authenticator } from "~/utils/auth.server";
 import { ActionFunction } from "@remix-run/node";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
 
-export function ErrorBoundary() {
-  const error = useRouteError();
 
-  if (isRouteErrorResponse(error)) {
-    return (
-      <div className="w-full h-screen flex flex-col justify-center items-center">
-        <h1 className=" font-bold text-5xl text-red-700">
-          {error.status} {error.statusText}
-        </h1>
-        <p className="font-semibold text-xl">{error.data.message}</p>
-        <Link to={"/login"} className="text-semibold">
-          try again
-        </Link>
-      </div>
-    );
-  } else if (error instanceof Error) {
-    return (
-      <div>
-        <h1>Error</h1>
-        <p>{error.message}</p>
-        <p>The stack trace is:</p>
-        <pre>{error.stack}</pre>
-      </div>
-    );
-  } else {
-    return <h1>Unknown Error</h1>;
-  }
-}
-
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const user = await authenticator.isAuthenticated(request, {
-    successRedirect: "/",
-  });
-  return user;
-};
+// export const loader = async ({ request }: LoaderFunctionArgs) => {
+//   const user = await authenticator.isAuthenticated(request, {
+//     successRedirect: "/",
+//   });
+//   return user;
+// };
 
 export const action: ActionFunction = async ({ request }) => {
   const user = authenticator.authenticate("form", request, {
@@ -87,3 +59,34 @@ const Login = () => {
 };
 
 export default Login;
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <div className="w-full h-screen flex flex-col justify-center items-center">
+        <h1 className=" font-bold text-5xl text-red-700">
+          {error.status} {error.statusText}
+        </h1>
+        <p className="font-semibold text-xl">{error.data.message}</p>
+        <Link to={"/login"} className="text-semibold">
+          try again
+        </Link>
+      </div>
+    );
+  } else if (error instanceof Error) {
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>{error.message}</p>
+        <p>The stack trace is:</p>
+        <pre>{error.stack}</pre>
+      </div>
+    );
+  } else {
+    return <h1>Unknown Error</h1>;
+  }
+}
+
+

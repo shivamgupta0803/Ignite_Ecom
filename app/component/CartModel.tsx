@@ -1,4 +1,3 @@
-// CartModal.tsx
 import { useCart } from "~/routes/cartcontext";
 
 export default function CartModal() {

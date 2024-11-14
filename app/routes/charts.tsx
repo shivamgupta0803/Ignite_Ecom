@@ -1,13 +1,13 @@
 import { LoaderFunction, redirect } from '@remix-run/node';
 import { authenticator } from '~/utils/auth.server';
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const user = await authenticator.isAuthenticated(request);
-  if (!user) {
-    return redirect("/login");
-  }
-  return user;
-}
+// export const loader: LoaderFunction = async ({ request }) => {
+//   const user = await authenticator.isAuthenticated(request);
+//   if (!user) {
+//     return redirect("/login");
+//   }
+//   return user;
+// }
 
 const Charts = () => {
   return (

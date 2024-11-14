@@ -4,18 +4,18 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
 } from "@remix-run/react";
 import "./tailwind.css";
-import { LoaderFunction } from "@remix-run/node";
-import { authenticator } from "./utils/auth.server";
 import Navbar from "./component/Navbar";
+import styles from "./tailwind.css"
+import { LinksFunction } from "@remix-run/node";
+// import { cssBundleHref } from "@remix-run/css-bundle";
 
+// export const links: LinksFunction = () => [
+//   { rel: "stylesheet", href: styles },
+//   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+// ]
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const user = await authenticator.isAuthenticated(request);
-  return { user };
-};
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -36,12 +36,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const { user } = useLoaderData<any>();
 
   return (
     <>
-        <Navbar user={user} />
-        <Outlet />
+      <Navbar />
+      <Outlet />
     </>
   );
 }

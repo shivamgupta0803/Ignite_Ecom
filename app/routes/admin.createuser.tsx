@@ -5,16 +5,16 @@ import { Form, useLoaderData } from "@remix-run/react";
 import { authenticator } from "~/utils/auth.server";
 
 // Loader function to check if the user is authenticated and has the 'admin' role
-export const loader: LoaderFunction = async ({ request }) => {
-  const user = await authenticator.isAuthenticated(request);
+// export const loader: LoaderFunction = async ({ request }) => {
+//   const user = await authenticator.isAuthenticated(request);
 
-  // If the user is not authenticated or doesn't have 'admin' role, redirect or return error
-  if (!user || user.role !== "admin") {
-    return redirect("/access-denied"); // Redirect to an access denied page or show an error message
-  }
+//   // If the user is not authenticated or doesn't have 'admin' role, redirect or return error
+//   if (!user || user.role !== "admin") {
+//     return redirect("/access-denied"); // Redirect to an access denied page or show an error message
+//   }
 
-  return { user };
-};
+//   return { user };
+// };
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();

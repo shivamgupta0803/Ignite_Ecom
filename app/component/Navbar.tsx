@@ -1,148 +1,119 @@
-import { Form, Link, useNavigate } from "@remix-run/react";
+"use client";
+import Menubar from "~/component/Menubar";
+import NavbarMenu from "~/component/NavbarMenu";
 
-export default function Navbar({ user }: { user: any }) {
-  const navigate = useNavigate();
-
-  const handleChange = (event: any) => {
-    const selectedValue = event.target.value;
-    if (selectedValue === "logout") {
-      navigate("/logout");
-    } else if (selectedValue === "profile") {
-      navigate("/profile");
-    }
-  };
-
+export default function NavigationMenuDemo() {
   return (
-    <div>
-      <nav className="bg-gradient-to-r from-purple-500 to-pink-500 p-4 shadow-lg">
-        <div className="container mx-auto flex justify-between items-center">
-          <Link to="/" className="text-white font-bold text-xl">
-            <img
-              src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQCFghbAxvuhjDtas7kAnKWvO4QPDR83gWeyPLU-1jeubzPk8PK"
-              alt="Logo"
-              className="w-12 h-12 rounded-full"
-            />
-          </Link>
-          <div className="flex items-center space-x-6">
-            {user ? (
-              <>
-                <div className="items-center rounded-full justify-center bg-white">
-                  <Form
-                    method="get"
-                    className="flex w-96 lg:max-w-[500px] rounded-full  px-2"
-                  >
-                    <input
-                      type="text"
-                      name="q"
-                      className="flex w-full rounded-full bg-white px-3 outline-0"
-                      placeholder="Search your products . . ."
-                    />
-
-                    <div className="border-gray-400 border-opacity-70 my-1 border-l "></div>
-
-                    <button
-                      type="submit"
-                      className="relative rounded-full bg-transparent px-2 py-3"
-                    >
-                      <svg
-                        className="fill-none size-6"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g id="SVGRepo_bgCarrier" strokeWidth="0" />
-                        <g
-                          id="SVGRepo_tracerCarrier"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <g id="SVGRepo_iconCarrier">
-                          <path
-                            d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                            stroke="#999"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </g>
-                      </svg>
-                    </button>
-                  </Form>
-                </div>
-                {user.role === "admin" ? (
-                  <div className="relative group">
-                    <div className="bg-gray-500 text-white  rounded-full p-2 hover:bg-pink-700">
-                      Admin Features
-                    </div>
-                    <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {/* <Link
-                      to="/dashboard"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                    >
-                      Dashboard
-                    </Link> */}
-                      <Link
-                        to="/admin/userlist"
-                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      >
-                        Userlist
-                      </Link>
-                      <Link
-                        to="admin/createuser"
-                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      >
-                        CreateUser
-                      </Link>
-                      <Link
-                        to="admin/addproduct"
-                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      >
-                        AddProduct
-                      </Link>
-                    </div>
-                  </div>
-                ) : (
-                  ""
-                )}
-                <div className="flex items-center space-x-4">
-                  <span className="text-white font-semibold">
-                    Welcome{" "}
-                    <u className="text-blue-300 font-semibold">{user.name}</u>!
-                  </span>
-                  <select
-                    id="userDropdown"
-                    className="bg-white text-gray-700 px-3 py-2 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-pink-400"
-                    onChange={handleChange}
-                  >
-                    <option value="profile">
-                      {user.name} {String.fromCodePoint(0x1f464)}
-                    </option>
-                    <option value="logout">
-                      Logout {String.fromCodePoint(0x1f6aa)}
-                    </option>
-                  </select>
-                </div>
-              </>
-            ) : (
-              <div className="flex items-center space-x-4">
-                <Link
-                  to="/login"
-                  className="text-white bg-green-500 px-3 py-2 rounded-lg shadow-md hover:bg-green-600"
+    <>
+      <div className="">
+        <header className="bg-red-300">
+          <div className="ml-10 p-12 ">
+            <div className=" flex mb-4 gap-10">
+              <div className="phone flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
                 >
-                  Login
-                </Link>
-                <span className="text-white mx-2">|</span>
-                <Link
-                  to="/register"
-                  className="text-white bg-blue-500 px-3 py-2 rounded-lg shadow-md hover:bg-blue-600"
-                >
-                  Register
-                </Link>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+                  />
+                </svg>
+                <p>
+                  +91 <span>9967667099</span>
+                </p>
               </div>
-            )}
+              <div className="email flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                  />
+                </svg>
+
+                <p>
+                  <span>shivamgupta@08032001gmail.com</span>
+                </p>
+              </div>
+            </div>
+            <div className="logo flex ">
+              <img
+                src="/images/logo.png"
+                className="w-20 h-20 rounded-lg"
+                alt=""
+              />
+              <h1 className="text-4xl mt-6 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-yellow-600">
+                <span className="ml-4 ">"GUPTA FATAKA MART"</span>
+              </h1>
+            </div>
           </div>
-        </div>
-      </nav>
-    </div>
+        </header>
+
+        {/* End OF Header Section */}
+
+        <nav className="border-b-4 border-indigo-600 p-4 flex flex-wrap items-center justify-between md:justify-start">
+          <div className="text-2xl font-bold text-indigo-600 ml-2 mb-2 md:mb-0">
+            BrandName
+          </div>
+
+          <button
+            className="text-indigo-600 md:hidden focus:outline-none"
+            aria-label="Toggle menu"
+            data-collapse-toggle="menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+
+          <div
+            className="hidden w-full md:flex md:flex-1 md:items-center md:justify-between mt-4 md:mt-0"
+            id="menu"
+          >
+            <div className="flex flex-col md:flex-row md:items-center md:space-x-6">
+              <NavbarMenu />
+            </div>
+            <div className="flex justify-end mt-4 md:mt-0">
+              <Menubar />
+            </div>
+          </div>
+        </nav>
+        <section>
+          <div className="page-banner-inner">
+            {/* <div style={{ paddingTop: "66.750%", position: "relative" }}> */}
+              <iframe
+                src="https://gifer.com/embed/4A5"
+                className="w-[100%] h-[50%]"
+                allowFullScreen
+              ></iframe>
+            {/* </div> */}
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

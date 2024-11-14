@@ -5,46 +5,46 @@ import { authenticator } from "~/utils/auth.server";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const user = await authenticator.isAuthenticated(request);
-  if (!user) {
-    return redirect("/login");
-  }
+// export const loader = async ({ request }: LoaderFunctionArgs) => {
+//   const user = await authenticator.isAuthenticated(request);
+//   if (!user) {
+//     return redirect("/login");
+//   }
 
-  const users = await db.user.findMany({
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-    },
-  });
+//   const users = await db.user.findMany({
+//     select: {
+//       id: true,
+//       name: true,
+//       email: true,
+//       role: true,
+//     },
+//   });
 
-  return { users, currentUser: user };
-};
+//   return { users, currentUser: user };
+// };
 
 export default function Users() {
-  const { users, currentUser } = useLoaderData<{
-    users: { id: number; name: string; email: string; role: string }[];
-    currentUser: { id: number; role: string };
-  }>();
+  // const { users, currentUser } = useLoaderData<{
+  //   users: { id: number; name: string; email: string; role: string }[];
+  //   currentUser: { id: number; role: string };
+  // }>();
 
-  if (currentUser.role !== "admin") {
-    return (
-      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
-        <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
-        <p>You do not have permission to view this page.</p>
-      </div>
-    );
-  }
+  // if (currentUser.role !== "admin") {
+  //   return (
+  //     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
+  //       <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
+  //       <p>You do not have permission to view this page.</p>
+  //     </div>
+  //   );
+  // }
 
-  if (!users || users.length === 0) {
-    return (
-      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
-        <h1 className="text-2xl font-bold mb-4">No Users Found</h1>
-      </div>
-    );
-  }
+  // if (!users || users.length === 0) {
+  //   return (
+  //     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
+  //       <h1 className="text-2xl font-bold mb-4">No Users Found</h1>
+  //     </div>
+  //   );
+  // }
 
   function handleAvatar() {
     Swal.fire({
@@ -119,7 +119,7 @@ export default function Users() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {users.map((user) => (
+            {/* {users.map((user) => (
               <tr key={user.id}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {user.id}
@@ -134,7 +134,7 @@ export default function Users() {
                   {user.role}
                 </td>
               </tr>
-            ))}
+            ))} */}
           </tbody>
         </table>
       </div>
