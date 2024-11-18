@@ -1,14 +1,23 @@
 "use client";
+import { CreativeCommons } from "lucide-react";
 import Menubar from "~/component/Menubar";
 import NavbarMenu from "~/component/NavbarMenu";
+import CartModel from "./CartModel";
 
-export default function NavigationMenuDemo() {
+export default function Navbar() {
   return (
     <>
       <div className="">
-        <header className="bg-red-300">
-          <div className="ml-10 p-12 ">
-            <div className=" flex mb-4 gap-10">
+        <header className="bg-red-500">
+          <div className="p-2">
+            <div className=" flex gap-10">
+              <div className="logo flex ">
+                <img
+                  src="/images/logo.png"
+                  className="w-40 h-20 rounded-lg"
+                  alt=""
+                />
+              </div>
               <div className="phone flex">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +25,7 @@ export default function NavigationMenuDemo() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6"
+                  className="size-6 text-white"
                 >
                   <path
                     strokeLinecap="round"
@@ -24,7 +33,7 @@ export default function NavigationMenuDemo() {
                     d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
                   />
                 </svg>
-                <p>
+                <p className="text-white">
                   +91 <span>9967667099</span>
                 </p>
               </div>
@@ -35,7 +44,7 @@ export default function NavigationMenuDemo() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6"
+                  className="size-6 text-white"
                 >
                   <path
                     strokeLinecap="round"
@@ -45,19 +54,11 @@ export default function NavigationMenuDemo() {
                 </svg>
 
                 <p>
-                  <span>shivamgupta@08032001gmail.com</span>
+                  <span className="text-white">
+                    shivamgupta@08032001gmail.com
+                  </span>
                 </p>
               </div>
-            </div>
-            <div className="logo flex ">
-              <img
-                src="/images/logo.png"
-                className="w-20 h-20 rounded-lg"
-                alt=""
-              />
-              <h1 className="text-4xl mt-6 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-yellow-600">
-                <span className="ml-4 ">"GUPTA FATAKA MART"</span>
-              </h1>
             </div>
           </div>
         </header>
@@ -66,7 +67,7 @@ export default function NavigationMenuDemo() {
 
         <nav className="border-b-4 border-indigo-600 p-4 flex flex-wrap items-center justify-between md:justify-start">
           <div className="text-2xl font-bold text-indigo-600 ml-2 mb-2 md:mb-0">
-            BrandName
+            GUPTA FIREWORKS
           </div>
 
           <button
@@ -97,6 +98,7 @@ export default function NavigationMenuDemo() {
             <div className="flex flex-col md:flex-row md:items-center md:space-x-6">
               <NavbarMenu />
             </div>
+            <CartModel/>
             <div className="flex justify-end mt-4 md:mt-0">
               <Menubar />
             </div>
@@ -105,11 +107,11 @@ export default function NavigationMenuDemo() {
         <section>
           <div className="page-banner-inner">
             {/* <div style={{ paddingTop: "66.750%", position: "relative" }}> */}
-              <iframe
-                src="https://gifer.com/embed/4A5"
-                className="w-[100%] h-[50%]"
-                allowFullScreen
-              ></iframe>
+            <iframe
+              src="https://gifer.com/embed/4A5"
+              className="w-[100%] h-[50%]"
+              allowFullScreen
+            ></iframe>
             {/* </div> */}
           </div>
         </section>

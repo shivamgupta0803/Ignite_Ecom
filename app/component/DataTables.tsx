@@ -36,29 +36,6 @@ import {
   TableRow,
 } from "~/components/ui/table";
 
-
-
-const data: Payment[] = [
-  {
-    photo: "photo1.jpg",
-    name: "Product A",
-    content: "1 box",
-    actual_price: 40,
-    discount_price: 20,
-    fill_quantity: 10,
-    total: 100,
-  },
-  {
-    photo: "photo2.jpg",
-    name: "Product B",
-    content: "2 boxes",
-    actual_price: 50,
-    discount_price: 25,
-    fill_quantity: 5,
-    total: 125,
-  },
-];
-
 export type Payment = {
   photo: string;
   name: string;
@@ -157,7 +134,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ];
 
-export default function DataTableDemo({products}:{products:any}) {
+export default function DataTableDemo({ products }: { products: Payment[] }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -167,7 +144,7 @@ export default function DataTableDemo({products}:{products:any}) {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data,
+    data: products,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

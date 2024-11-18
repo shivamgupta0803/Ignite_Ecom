@@ -79,7 +79,7 @@ export default function NavigationMenuDemo() {
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/docs" title="Photo Gallery ">
+              <ListItem href="/photogallery" title="Photo Gallery ">
                 Re-usable components built using Radix UI and Tailwind CSS.
               </ListItem>
               <ListItem href="/docs/installation" title="Video Gallery">
