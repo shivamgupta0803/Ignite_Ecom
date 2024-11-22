@@ -4,13 +4,12 @@ import { authenticator } from "~/utils/auth.server";
 import { ActionFunction } from "@remix-run/node";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
 
-
-// export const loader = async ({ request }: LoaderFunctionArgs) => {
-//   const user = await authenticator.isAuthenticated(request, {
-//     successRedirect: "/",
-//   });
-//   return user;
-// };
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const user = await authenticator.isAuthenticated(request, {
+    successRedirect: "/",
+  });
+  return user;
+};
 
 export const action: ActionFunction = async ({ request }) => {
   const user = authenticator.authenticate("form", request, {
@@ -88,5 +87,3 @@ export function ErrorBoundary() {
     return <h1>Unknown Error</h1>;
   }
 }
-
-
