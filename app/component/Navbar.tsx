@@ -1,29 +1,53 @@
 "use client";
-import Menubar from "~/component/Menubar";
-import NavbarMenu from "~/component/NavbarMenu";
-import CartModel from "./CartModel";
 import { Facebook, Instagram } from "lucide-react";
-import { Link } from "@remix-run/react";
+import { Form, Link, useSearchParams } from "@remix-run/react";
 
-export default function Navbar() {
+export default function Navbar({ query, placeholder = "Search..." }: any) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   return (
     <>
-      <header className="bg-gradient-to-r from-red-500 via-orange-500 to-red-500 p-4">
+      <header className="bg-gradient-to-r bg-gray-100 p-4">
         <div className="container mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <img
-              src="/public/images/logo.png"
+            {/* <img
+              src="/logo.png"
               alt="Logo"
               className="w-20 h-20 rounded-lg"
-            />
-            <div className="ml-4 text-white text-lg font-bold">
+            /> */}
+            <div className="ml-4 text-black text-lg font-bold">
               Gupta Fireworks
             </div>
           </div>
 
+          {/* navbar */}
+          <Form
+            method="get"
+            className="flex  lg:max-w-[500px] rounded-lg border-gray-400 border-opacity-65 border bg-gray-100 px-2"
+          >
+            <input
+              type="text"
+              name="q"
+              className="flex w-full bg-transparent px-3 text-gray-700 rtl:text-right outline-0"
+              placeholder={placeholder}
+              value={query}
+              onChange={(e) => setSearchParams({ q: e.target.value })}
+            />
+
+            <div className="border-gray-400 border-opacity-70 my-1 border-l"></div>
+
+            <button
+              type="submit"
+              className="relative rounded-full bg-transparent px-2 py-3"
+            >
+              🔍
+            </button>
+          </Form>
+          {/* end navbar */}
+
           {/* Contact Information */}
-          <div className="hidden lg:flex items-center gap-6 text-white">
+          <div className="hidden lg:flex items-center gap-6 text-black">
             <div className="flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

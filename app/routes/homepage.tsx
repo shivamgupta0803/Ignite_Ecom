@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const HomePage = () => {
@@ -6,6 +7,12 @@ const HomePage = () => {
   const changeLanguage = (lng: string | undefined) => {
     i18n.changeLanguage(lng); // Use the i18n instance from useTranslation hook
   };
+
+  useEffect(() => {
+    const isRTL = ['ar', 'he'].includes(i18n.language);
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+  }, [i18n.language]);
+  
 
   return (
     <div>
@@ -20,3 +27,5 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
