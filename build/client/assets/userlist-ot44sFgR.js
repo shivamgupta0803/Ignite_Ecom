@@ -1,4 +1,4 @@
-import{j as e}from"./jsx-runtime-BWtM72Fx.js";import{S as s}from"./sweetalert2.esm.all-D3pEHXw3.js";function l(){function r(){s.fire({title:"Submit your Github username",input:"text",inputAttributes:{autocapitalize:"off"},showCancelButton:!0,confirmButtonText:"Look up",showLoaderOnConfirm:!0,preConfirm:async t=>{try{const i=`
+import{j as e}from"./jsx-runtime-56DGgGmo.js";import{S as s}from"./sweetalert2.esm.all-D3pEHXw3.js";function l(){function r(){s.fire({title:"Submit your Github username",input:"text",inputAttributes:{autocapitalize:"off"},showCancelButton:!0,confirmButtonText:"Look up",showLoaderOnConfirm:!0,preConfirm:async t=>{try{const i=`
           https://api.github.com/users/${t}
         `,a=await fetch(i);return a.ok?a.json():s.showValidationMessage(`
             ${JSON.stringify(await a.json())}

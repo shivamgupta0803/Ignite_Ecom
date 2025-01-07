@@ -34,3 +34,11 @@ model User {
   createdAt   DateTime @default(now())
 }
 
+model Cart {
+  id        String   @id @default(uuid())
+  productId String
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+

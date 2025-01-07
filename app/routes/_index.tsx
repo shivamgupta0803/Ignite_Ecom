@@ -1,6 +1,5 @@
-import { json, LoaderFunctionArgs } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import SearchForm from "~/component/Search";
+import { ActionFunction, ActionFunctionArgs, json, LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { Form, useLoaderData } from "@remix-run/react";
 import ProductsList from "~/component/ProductsList";
 import { db } from "~/utils/db.server";
 import { Button } from "~/components/ui/button";
@@ -16,18 +15,20 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return json({ products: filteredProducts, query });
 }
 
+
+
+
+
 const Index = () => {
   const { products, query } = useLoaderData<typeof loader>();
   return (
     <>
-      <div className="flex items-center justify-center bg-white">
-        {/* <SearchForm query={query} placeholder="Search your products" /> */}
-      </div>
+      <div className="flex items-center justify-center bg-white"></div>
       <div className="mb-4 mt-4">
         <ProductsList products={products} />
       </div>
       <div className="check_out-btn flex justify-end">
-        <Button>Procced To Checkout</Button>
+        <footer>&copy; Gupta Fireworks</footer>
       </div>
     </>
   );
