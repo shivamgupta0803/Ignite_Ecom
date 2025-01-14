@@ -10,57 +10,94 @@ export async function loader() {
 }
 
 
+
 export async function action({ request }: ActionFunctionArgs) {
+  // const formData = await request.formData();
+
+  // // Parse FormData into an array of structured objects
+  // const entries = Array.from(formData.entries());
+  // const groupedCart: any[] = [];
+
+  // // Group data into structured array of objects
+  // for (const [key, value] of entries) {
+  //   const match = key.match(/^products\[(\d+)\]\[(\w+)\]$/);
+  //   if (match) {
+  //     const [, index, field] = match;
+  //     groupedCart[parseInt(index, 10)] = {
+  //       ...groupedCart[parseInt(index, 10)],
+  //       [field]: value,
+  //     };
+  //   }
+  // }
+
+  // console.log("Parsed Cart Data:", groupedCart);
+
+  // try {
+  //   // Iterate over the grouped cart items and process them
+  //   for (const item of groupedCart) {
+  //     // Create the product in the database (this won't update existing products)
+  //     const product = await db.product.create({
+  //       data: {
+  //         id: item.id, // Assuming you are manually passing the id
+  //         name: item.name,
+  //         totalPrice: parseFloat(item.totalPrice), // Assuming totalPrice is needed
+  //         quantity: parseInt(item.quantity, 10),
+  //       },
+  //     });
+
+  //     // Create a cart entry for the product
+  //     await db.cart.create({
+  //       data: {
+  //         productId: product.id, // Linking the newly created product
+  //         quantity: parseInt(item.quantity, 10), // Quantity in the cart
+  //       },
+  //     });
+  //   }
+
+  //   console.log("Cart and products saved successfully!");
+  //   return redirect("/");
+  // } catch (error) {
+  //   console.error("Error saving cart data:", error);
+  //   return json(
+  //     { success: false, message: "Error saving cart and products." },
+  //     { status: 500 }
+  //   );
+  // }
   const formData = await request.formData();
 
-  // Parse FormData into an array of structured objects
-  const entries = Array.from(formData.entries());
-  const groupedCart: any[] = [];
-
-  // Group data into structured array of objects
-  for (const [key, value] of entries) {
-    const match = key.match(/^products\[(\d+)\]\[(\w+)\]$/);
+  // Convert the FormData into a usable object
+  const products: { id: string; name: string; quantity: string; totalPrice: string }[] = [];
+  for (const [key, value] of formData.entries()) {
+    const match = key.match(/^products\[(\d+)]\[(\w+)]$/); // Regex to match the product keys
     if (match) {
-      const [, index, field] = match;
-      groupedCart[parseInt(index, 10)] = {
-        ...groupedCart[parseInt(index, 10)],
-        [field]: value,
-      };
+      const index = parseInt(match[1], 10); // Parse the index as a number
+      const field = match[2];
+      if (!products[index]) {
+        products[index] = { id: "", name: "", quantity: "", totalPrice: "" }; // Initialize the product object for the index
+      }
+      products[index][field as keyof typeof products[number]] = value.toString();
     }
   }
 
-  console.log("Parsed Cart Data:", groupedCart);
-
+  // Save products to the Cart model
   try {
-    // Iterate over the grouped cart items and process them
-    for (const item of groupedCart) {
-      // Create the product in the database (this won't update existing products)
-      const product = await db.product.create({
-        data: {
-          id: item.id, // Assuming you are manually passing the id
-          name: item.name,
-          totalPrice: parseFloat(item.totalPrice), // Assuming totalPrice is needed
-          quantity: parseInt(item.quantity, 10),
-        },
-      });
+    await Promise.all(
+      products.map((product) => {
+        return db.cart.create({
+          data: {
+            productId: product.id,
+            name: product.name,
+            quantity: parseInt(product.quantity, 10), 
+            totalPrice: Number(product.totalPrice),
+          },
+        });
+      })
+    );
 
-      // Create a cart entry for the product
-      await db.cart.create({
-        data: {
-          productId: product.id, // Linking the newly created product
-          quantity: parseInt(item.quantity, 10), // Quantity in the cart
-        },
-      });
-    }
-
-    console.log("Cart and products saved successfully!");
-    return redirect("/checkout");
+    return json({ success: true });
   } catch (error) {
     console.error("Error saving cart data:", error);
-    return json(
-      { success: false, message: "Error saving cart and products." },
-      { status: 500 }
-    );
+    return json({ success: false, error: "Failed to save cart data" }, { status: 500 });
   }
 }
 

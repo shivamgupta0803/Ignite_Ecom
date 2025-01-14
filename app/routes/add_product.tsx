@@ -53,7 +53,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       },
     });
 
-    return redirect("/products?success=true"); // Redirect with a success query parameter
+    return redirect("/"); // Redirect with a success query parameter
   } catch (error) {
     console.error("Error processing action:", error);
     return json(

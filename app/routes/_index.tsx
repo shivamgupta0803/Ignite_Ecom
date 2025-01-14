@@ -15,6 +15,16 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return json({ products: filteredProducts, query });
 }
 
+export async function action({ request }: ActionFunction) {
+  const formData = await request.clone().formData();
+
+  const name = formData.get("name");
+
+  console.log(name)
+
+  return null;
+}
+
 
 
 
